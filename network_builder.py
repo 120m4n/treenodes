@@ -249,6 +249,8 @@ class NetworkBuilder:
         """
         Find the node with tipo='Subestacion' to use as the starting point for BFS.
         
+        If multiple Subestacion nodes exist, returns the first one found.
+        
         Returns:
             The node ID of the Subestacion node
             

@@ -103,11 +103,11 @@ def test_bfs_from_subestacion():
         assert len(closure_entries) > 0, "No closure entries generated"
         
         # Verify the root node (Subestacion) is in the closure table
-        root_entries = [e for e in closure_entries if e[0] == 1 and e[1] == 1]
+        root_entries = [e for e in closure_entries if e[0] == subestacion_id and e[1] == subestacion_id]
         assert len(root_entries) == 1, "Root node should have one self-reference entry"
         
         # Verify all other nodes are descendants of Subestacion
-        descendant_ids = set([e[1] for e in closure_entries if e[0] == 1 and e[2] > 0])
+        descendant_ids = set([e[1] for e in closure_entries if e[0] == subestacion_id and e[2] > 0])
         expected_descendants = {2, 3, 4}
         assert descendant_ids == expected_descendants, f"Expected descendants {expected_descendants}, got {descendant_ids}"
         
