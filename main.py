@@ -49,23 +49,22 @@ def main():
         sys.exit(1)
     
     print("\n3. Performing BFS traversal to build closure table")
-    # Perform BFS traversal from all connected components
+    # Find and start BFS from the Subestacion node
     all_closure_entries = []
-    visited_global = set()
     
     try:
-        for start_node in network.get_nodes():
-            if start_node not in visited_global:
-                # Perform BFS from this starting node
-                closure_entries = network.bfs_traversal(start_node)
-                all_closure_entries.extend(closure_entries)
-                
-                # Mark all nodes in this component as visited
-                for ancestor, descendant, depth in closure_entries:
-                    visited_global.add(ancestor)
-                    visited_global.add(descendant)
+        # Find the Subestacion node (raises error if not found)
+        subestacion_node = builder.find_subestacion_node()
+        print(f"   ✓ Found Subestacion node: {subestacion_node}")
+        
+        # Perform BFS from the Subestacion node
+        closure_entries = network.bfs_traversal(subestacion_node)
+        all_closure_entries.extend(closure_entries)
         
         print(f"   ✓ Generated {len(all_closure_entries)} closure table entries")
+    except ValueError as e:
+        print(f"   ✗ Error: {e}")
+        sys.exit(1)
     except Exception as e:
         print(f"   ✗ Error during BFS traversal: {e}")
         sys.exit(1)
