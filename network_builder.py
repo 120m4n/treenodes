@@ -244,3 +244,22 @@ class NetworkBuilder:
         For now, return all nodes to allow traversal from any starting point.
         """
         return self.network.get_nodes()
+    
+    def find_subestacion_node(self) -> int:
+        """
+        Find the node with tipo='Subestacion' to use as the starting point for BFS.
+        
+        If multiple Subestacion nodes exist, returns the first one found.
+        
+        Returns:
+            The node ID of the Subestacion node
+            
+        Raises:
+            ValueError: If no node with tipo='Subestacion' is found
+        """
+        for node_id in self.network.get_nodes():
+            attrs = self.network.get_node_attributes(node_id)
+            if attrs.get('tipo') == 'Subestacion':
+                return node_id
+        
+        raise ValueError("No se encontró un nodo con tipo='Subestacion'. El algoritmo BFS requiere iniciar desde una Subestacion.")
