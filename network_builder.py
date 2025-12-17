@@ -73,7 +73,7 @@ class NetworkXAdapter(NetworkInterface):
     
     def bfs_traversal(self, start_node: int) -> List[tuple[int, int, int]]:
         """
-        BFS traversal using a stack (deque) to build closure table.
+        BFS traversal using a queue (deque) to build closure table.
         Returns (ancestor, descendant, depth) for each relationship.
         """
         closure_entries = []
@@ -151,7 +151,7 @@ class ManualNetworkAdapter(NetworkInterface):
     
     def bfs_traversal(self, start_node: int) -> List[tuple[int, int, int]]:
         """
-        BFS traversal using a stack (deque) to build closure table.
+        BFS traversal using a queue (deque) to build closure table.
         Returns (ancestor, descendant, depth) for each relationship.
         """
         closure_entries = []
