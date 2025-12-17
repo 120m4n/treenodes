@@ -162,15 +162,15 @@ WHERE nodo_inicio = 655795 OR nodo_fin = 655795;
 SELECT n.* 
 FROM closure_table ct
 JOIN nodos_circuito n ON ct.descendant = n.id_nodo
-WHERE ct.ancestor = 655795 AND ct.depth > 0;
+WHERE ct.ancestor = 3 AND ct.depth >= 0;
 ```
 
 ### Find all ancestors of a node
 ```sql
-SELECT n.* 
+SELECT ct.ancestor, n.tipo, n.nombre
 FROM closure_table ct
 JOIN nodos_circuito n ON ct.ancestor = n.id_nodo
-WHERE ct.descendant = 655795 AND ct.depth > 0;
+WHERE ct.descendant = 10 AND ct.depth!=0 order by ct.depth desc;
 ```
 
 ### Find nodes at specific depth from a node
@@ -178,7 +178,7 @@ WHERE ct.descendant = 655795 AND ct.depth > 0;
 SELECT n.* 
 FROM closure_table ct
 JOIN nodos_circuito n ON ct.descendant = n.id_nodo
-WHERE ct.ancestor = 655795 AND ct.depth = 2;
+WHERE ct.ancestor = 1 AND ct.depth = 2;
 ```
 
 ## Future Enhancements
@@ -201,6 +201,10 @@ All database table names and column names are derived directly from the CSV file
 | `nodos_circuito.csv` | `nodos_circuito` | Network nodes |
 | `segmentos_circuito.csv` | `segmentos_circuito` | Network segments |
 | (Generated) | `closure_table` | Hierarchical relationships |
+
+## Literature
+
+https://web.archive.org/web/20130701143352/http://technobytz.com/closure_table_store_hierarchical_data.html
 
 ## License
 
